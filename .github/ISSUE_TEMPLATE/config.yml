@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: SPS beta access and private support
+    url: https://redongames.com/contact/
+    about: Request beta access or discuss account and installation issues privately.
+  - name: SPS security report
+    url: https://redongames.com/contact/
+    about: Report vulnerabilities and sensitive issues privately.
