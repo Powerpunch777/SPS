@@ -1,132 +1,72 @@
-<p align="center">
-  <img src="assets/sps-logo.png" alt="SPS 로고" width="190" />
-</p>
+# SPS — AI 개발 작업환경
 
-<h1 align="center">SPS</h1>
+**SPS(SonParkServer)는 프로젝트 파일, 여러 AI 도구, 실행 결과를 한곳에서 관리하는 Windows 데스크톱 앱입니다.** 플러그인을 통해 게임 개발, 연구 등 프로젝트마다 다른 작업 방식을 구성할 수 있습니다.
 
-<p align="center">
-  <strong>팀에게 필요한 AI 작업환경을 직접 구성하세요.</strong>
-</p>
+[English](README.md) · [제품 웹사이트](https://redongames.com/sps/) · [Plugin SDK](https://github.com/Powerpunch777/sps-plugin-sdk) · [Soul Archer](https://github.com/Powerpunch777/school-arcade-unity)
 
-<p align="center">
-  개인과 소규모 팀을 위한 로컬 우선·플러그인 기반 Windows Desktop 플랫폼
-</p>
+**현재 상태:** 개발 중인 비공개 피드백 베타입니다. 이 저장소는 프로젝트 소개와 문서, 개발 도구를 안내하며 데스크톱 앱의 소스 코드를 포함하지 않습니다. 설치하거나 베타에 참여하지 않아도 이 페이지에서 프로젝트를 살펴볼 수 있습니다.
 
-<p align="center">
-  <a href="https://redongames.com/sps/">제품 웹사이트</a>
-  ·
-  <a href="https://redongames.com/download/">SPS Desktop 다운로드</a>
-  ·
-  <a href="README.md">English</a>
-</p>
+## 만들고 있는 이유
 
-> **비공개 피드백 베타:** SPS는 현재 개발 중이며 소수의 테스터를 대상으로
-> 검증하고 있습니다. 중요한 작업은 반드시 별도로 백업해 주세요.
+여러 AI 도구를 사용해 개발하다 보면 프로젝트 파일, 대화, 실행 결과, 후속 작업이 서로 흩어지기 쉽습니다. 저는 이 과정을 한곳에서 관리하고, 만들고 있는 프로젝트에 맞게 도구를 조정할 수 있는 환경을 원했습니다.
 
-## SPS는 무엇인가요?
+SPS는 그 환경을 직접 만들어 가는 프로젝트입니다. 프로젝트 폴더를 호스트 컴퓨터에 두고, 선택한 AI 도구를 연결하며, 실행 과정과 결과물을 기록합니다. 작업 목록, 공동 작업공간, 프로젝트 기억처럼 실제로 일하는 방식은 플러그인이 추가합니다.
 
-SPS(SonParkServer)는 AI 작업환경을 만들고 운영하는 Windows Desktop
-플랫폼입니다. 모든 프로젝트에 같은 Task 보드, Room 구조, 역할 체계,
-장기기억 방식, 개발 절차를 강요하지 않습니다.
+## Soul Archer와의 연결
 
-SPS Core는 컴퓨터 연결, AI Runtime, 프로젝트 Source 접근, 실행 기록,
-Artifact, 플러그인, 업데이트, 진단과 복구 기반을 담당합니다. 실제로 팀이
-어떻게 일할지는 플러그인이 정의합니다.
+저는 이동을 멈춰야 공격할 수 있는 Unity 액션 게임 [Soul Archer](https://github.com/Powerpunch777/school-arcade-unity)를 개발하면서 SPS를 작업환경으로 사용했습니다. 게임을 만드는 과정에서 작업환경의 불편한 점과 부족한 기능을 발견했고, 이를 SPS를 개선할 구체적인 계기로 삼았습니다.
 
-따라서 같은 SPS를 게임 제작, 앱·웹 개발, 연구, 자동화 또는 완전히 새로운
-작업 방식에 맞춰 구성할 수 있습니다.
+두 프로젝트는 서로 다른 관심을 보여 줍니다. Soul Archer에서는 게임 규칙이 플레이어의 판단에 미치는 영향을 탐구하고, SPS에서는 프로젝트를 만들고 수정하는 과정을 도구가 어떻게 지원할 수 있을지 탐구합니다. 필요한 환경을 정의하고 실제 프로젝트에 사용하며 개선 방향을 결정하는 것이 제가 SPS에서 하는 일의 일부입니다.
 
-## 왜 필요한가요?
+도구가 작업의 장애물이 되었을 때 문제를 살펴보고 도구 자체를 개선해 보는 과정이 이 프로젝트에서 특히 흥미로운 부분입니다.
 
-기존 AI 도구는 대개 독립된 채팅이거나 작업 방식이 고정된 제품입니다.
-하지만 실제 팀에는 그 중간이 필요합니다.
+## 주요 기능
 
-- 한 번 쓰고 사라지는 대화가 아닌 지속되는 프로젝트 맥락
-- Codex 같은 CLI, 로컬 AI, 전문 API를 함께 쓰는 실행 환경
-- 모든 프로젝트 파일을 SaaS에 올리지 않는 공동 작업공간
-- 프로젝트 종류마다 다른 작업 구조
-- 어떤 컴퓨터·AI·폴더·플러그인을 사용할지 정하는 명시적인 통제
-
-SPS는 이 환경을 연결하고 관리하는 Control Plane입니다.
-
-## 작동 방식
-
-1. Host가 Windows 컴퓨터에서 SPS Workspace를 만듭니다.
-2. Host가 Workspace에서 사용할 프로젝트 폴더와 AI Runtime을 지정합니다.
-3. Member는 Tailscale을 통해 참여하고 자신의 컴퓨터에 있는 승인된 CLI나
-   로컬 AI를 제공할 수 있습니다.
-4. 플러그인이 Room, Task, 역할, 장기기억, 승인 방식, 전문 도구 등 실제
-   작업 구조를 추가합니다.
-5. SPS Desktop에서 실행 상태, 결과물과 기술 기록을 확인합니다.
-
-일반 웹 브라우저는 Workspace 사용 경로가 아닙니다. SPS Desktop이 공식
-제품 화면입니다.
-
-## Core와 플러그인의 경계
-
-| SPS Core가 제공하는 것 | 플러그인이 정하는 것 |
+| 기능 | 실제 의미 |
 | --- | --- |
-| Desktop Host와 Member 연결 | Room, Task, 보드, 보고 방식 |
-| Workspace Source와 보호된 접근 경로 | Lead/Worker 또는 다른 역할 구조 |
-| Runtime 조회와 실행 | 검토와 승인 흐름 |
-| Run, Event, Artifact, Log, Job | 장기기억과 Compact 정책 |
-| Secret, Storage, 진단, 업데이트 | 게임·앱·웹·연구 등 분야별 작업 방식 |
-| 플러그인 검사, 호환성, 활성화, 업데이트, 롤백 | 분야별 도구와 UI |
+| 로컬 프로젝트 접근 | 호스트가 작업공간에서 사용할 폴더를 선택합니다. 기존 프로젝트는 그 폴더에 유지됩니다. |
+| AI 도구 연결 | 지원되는 명령줄 AI 도구, 로컬 모델, API 기반 에이전트를 연결합니다. |
+| 실행 기록 | 실행 내역, 이벤트, 로그, 결과물로 어떤 작업이 이루어졌는지 확인합니다. |
+| 플러그인 | 프로젝트에 필요한 작업 절차, 도구, 화면, 기억 방식을 추가합니다. |
+| 승인된 컴퓨터 연결 | Host/Member/Node 구조를 통해 다른 컴퓨터의 선택된 AI 실행 환경을 연결합니다. |
 
-Host와 Member는 기술적인 연결 역할입니다. 플러그인은 Core를 수정하지
-않고도 사람과 AI의 업무 역할을 새로 만들 수 있습니다.
+‘로컬 중심’은 작업공간과 프로젝트 파일을 관리하는 위치를 뜻합니다. 연결한 클라우드 AI 서비스에는 작업 중 데이터가 전달될 수 있으며, 모든 AI가 오프라인으로 실행된다는 의미는 아닙니다.
 
-## 원하는 작업 방식으로 시작하기
+## 사용 흐름
 
-새 Workspace는 중립 상태로 시작합니다. 기본으로 **Plugin Discovery &
-Builder**가 활성화되고 Initial Assistant 한 명을 등록합니다. Assistant에게
-원하는 환경을 설명해 Catalog를 찾거나, 공개 SDK로 개인 플러그인을 만들 수
-있습니다.
+1. Windows 호스트 컴퓨터의 SPS Desktop에서 작업공간을 만듭니다.
+2. 사용할 프로젝트 폴더와 AI 도구를 선택합니다.
+3. **Plugin Discovery & Builder**에 원하는 작업 방식을 설명하거나 기존 확장을 선택합니다.
+4. **Settings > Plugins**에서 플러그인을 검토하고 활성화합니다.
+5. 작업을 실행하고 결과를 확인하며 프로젝트나 작업 방식을 수정합니다.
 
-플러그인 관리는 **Settings > Plugins**에서 이루어집니다. AI의 추천이나
-초안만으로 플러그인이 자동 설치되지는 않습니다. 설치, 활성화, 업데이트,
-롤백과 제거는 Host가 명시적으로 결정합니다.
+공동 작업 시 승인된 사용자는 Tailscale을 통해 연결합니다. 공식 사용 화면은 SPS Desktop입니다.
 
-## 비공개 베타 준비물
+## 설계 결정 — 기본 기능과 작업 방식의 분리
 
-- Windows 10/11 x64
-- 피드백 베타에 승인된 Google 계정
-- 팀 연결에 사용할 각 컴퓨터의 Tailscale
-- 지원되는 CLI, 로컬 AI 또는 API 기반 Agent 한 개 이상
+**Core**는 컴퓨터 연결, 프로젝트 접근, 실행 기록, 저장 공간, 플러그인 관리를 담당합니다. **플러그인**은 작업 보드, 역할, 검토 절차, 장기기억 등 실제 업무 방식을 정의합니다.
 
-현재 설치 파일과 안내는
-[redongames.com/download](https://redongames.com/download/)에서 확인할 수
-있습니다.
+이 분리는 같은 기반으로 다양한 프로젝트를 지원하기 위한 선택입니다. AI가 확장을 추천하거나 초안을 만들어도 설치, 활성화, 업데이트, 롤백, 제거는 호스트가 결정합니다.
 
-## 플러그인 개발
+공개 [Plugin SDK](https://github.com/Powerpunch777/sps-plugin-sdk)는 `.spsplugin` 확장 제작, 검증, 패키징, 검사 도구를 제공합니다. 자세한 내용은 [플러그인 개발 안내](docs/PLUGIN-DEVELOPMENT.md)를 참고하세요.
 
-공개 [SPS Plugin SDK](https://github.com/Powerpunch777/sps-plugin-sdk)로
-`.spsplugin` 패키지를 만들고 검사할 수 있습니다. 자신이 만든 플러그인은
-공식 검토를 기다리지 않고 Local Development Registry에서 시험할 수
-있습니다. Registry 신뢰와 플러그인 활성화는 Host가 결정합니다.
+## 현재 범위와 다음 과제
 
-자세한 내용은 [플러그인 개발 안내](docs/PLUGIN-DEVELOPMENT.md)를 참고하세요.
+제품 문서에 기록된 구현 범위에는 Windows 데스크톱 앱, 로컬 호스트, 프로젝트 폴더 접근, AI 실행 연결, 실행 기록, 플러그인 생명주기와 호환성 검사, 로컬 개발 레지스트리, 내보내기 기반, 자동 업데이트가 포함됩니다.
 
-## 현재 상태
+첫 완성형 출시를 위한 안정화는 계속 진행 중입니다. 문서에 정리된 과제에는 호스트 가져오기와 복구, 격리된 플러그인 미리보기, 검증된 마켓플레이스 화면, Windows 코드 서명, 실제 두 컴퓨터 반복 검증이 있습니다. 베타 제공이 모든 계획 기능의 완성을 의미하지는 않습니다.
 
-Windows Desktop, 로컬 Host, Workspace Source, Host/Member/Node 연결,
-Runtime 실행, 플러그인 생명주기와 호환성 검사, Local Development Registry,
-데이터 내보내기 기반, 자동 업데이트 구조가 구현되어 있습니다.
+피드백 베타에는 Windows 10/11 x64, 승인된 Google 계정, 지원되는 AI 실행 환경이 하나 이상 필요합니다. Host/Member 공동 작업에는 각 컴퓨터의 Tailscale이 필요합니다. 중요한 작업은 별도로 백업해 주세요.
 
-첫 완성형 출시에 앞서 Host Import와 복구, 격리된 Plugin Preview, 검증된
-Marketplace 화면, Windows 코드 서명, 실제 두 컴퓨터 반복 검증을 진행하고
-있습니다.
+[설치 및 베타 안내](https://redongames.com/download/) · [시작 안내](docs/GETTING-STARTED.md) · [제품 개요](docs/PRODUCT.md)
 
-제품 문의, 베타 참여, 협업 제안과 비공개 보안 신고는
-[redongames1234@gmail.com](mailto:redongames1234@gmail.com)으로 보내주세요.
+## 관련 저장소
 
-## 공개 범위
+- [Soul Archer](https://github.com/Powerpunch777/school-arcade-unity) — SPS를 사용해 개발한 게임과 실행 화면, 담당 역할.
+- [SPS Plugin SDK](https://github.com/Powerpunch777/sps-plugin-sdk) — Apache-2.0으로 공개된 확장 제작 및 검증 도구.
+- [Official Extensions](https://github.com/Powerpunch777/SPS-Official-Extensions) — 자체 확장 카탈로그.
+- [Desktop Releases](https://github.com/Powerpunch777/SPS-Desktop-Releases) — 설치 파일과 업데이트 정보.
 
-이 저장소는 제품 소개와 피드백을 위한 저장소이며 SPS Core나 Desktop 소스를
-포함하지 않습니다. Core는 비공개이고, 플러그인 연결부와 개발 도구는
-[SPS Plugin SDK](https://github.com/Powerpunch777/sps-plugin-sdk)에서
-Apache-2.0 라이선스로 공개됩니다.
+피드백과 베타 문의는 [redongames1234@gmail.com](mailto:redongames1234@gmail.com)으로 보내 주세요. 비공개 보안 신고는 [SECURITY.md](SECURITY.md)를 참고하고, 공개 이슈에는 인증 정보나 비공개 프로젝트 데이터를 포함하지 마세요.
 
-SPS 소프트웨어, 이름과 로고의 사용 권한은 이 저장소를 공개한 것만으로
-부여되지 않습니다. 자세한 내용은 [NOTICE.md](NOTICE.md)를 참고하세요.
-
+이 저장소는 제품 문서와 브랜드 자산을 포함합니다. 공개 열람만으로 소프트웨어나 브랜드 사용 권한을 부여하지 않습니다. [NOTICE.md](NOTICE.md)를 참고하세요.

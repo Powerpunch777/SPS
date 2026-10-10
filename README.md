@@ -1,175 +1,72 @@
-<p align="center">
-  <img src="assets/sps-logo.png" alt="SPS logo" width="190" />
-</p>
+# SPS — An AI Development Workspace
 
-<h1 align="center">SPS</h1>
+**SPS (SonParkServer) is a Windows desktop application that brings project files, AI tools, and their work into one workspace.** Plugins let the workspace adapt to different projects, from game development to research.
 
-<p align="center">
-  <strong>Build the AI workspace your team actually needs.</strong>
-</p>
+[한국어](README.ko.md) · [Product website](https://redongames.com/sps/) · [Plugin SDK](https://github.com/Powerpunch777/sps-plugin-sdk) · [Soul Archer](https://github.com/Powerpunch777/school-arcade-unity)
 
-<p align="center">
-  A local-first, plugin-based Windows Desktop platform for individuals and small teams.
-</p>
+**Status:** Active development / private feedback beta. This repository introduces the project and links to its documentation and developer tools; it does not contain the desktop application's source code. You can explore the project here without installing it or joining the beta.
 
-<p align="center">
-  <a href="https://redongames.com/sps/">Product website</a>
-  ·
-  <a href="https://redongames.com/download/">Download SPS Desktop</a>
-  ·
-  <a href="README.ko.md">한국어</a>
-</p>
+## Why I am building it
 
-> **Private feedback beta:** SPS is under active development and is currently
-> intended for a small group of testers. Do not rely on a beta installation as
-> the only copy of important work.
+Developing with several AI tools creates a practical problem: project files, conversations, execution results, and follow-up work can become separated. I wanted an environment where I could manage those pieces together and adapt the tools to the project I was making.
 
-## What is SPS?
+SPS is my ongoing attempt to build that environment. It keeps project folders on a host computer, connects selected AI tools, and records their runs and outputs. Plugins add the way work is organized, such as tasks, shared work rooms, or project memory.
 
-SPS (SonParkServer) is a Windows Desktop platform for building and operating
-AI work environments. It gives a team a shared technical foundation without
-forcing every project into the same Task board, Room layout, role hierarchy,
-memory policy, or development method.
+## How it connects to Soul Archer
 
-The SPS Core handles computers, AI runtimes, project-source access, execution
-records, artifacts, plugins, updates, diagnostics, and recovery foundations.
-Plugins define how a particular team works.
+I used SPS as a working environment while developing [Soul Archer](https://github.com/Powerpunch777/school-arcade-unity), a Unity action game in which the player must stop moving to attack. Building the game exposed inconveniences and missing capabilities in the workspace, which gave me concrete reasons to improve SPS.
 
-That separation lets the same SPS installation support a game-production
-team, an app or web team, a research workflow, or a completely custom process.
+The two projects show different parts of my work: Soul Archer explores how game rules shape a player's decisions; SPS explores how development tools can support the process of making and revising a project. My work on SPS includes defining the environment I need, trying it on a real project, and using those experiences to guide improvements.
 
-## Why it exists
+This is the part of the project that interests me most: when a tool becomes an obstacle, I can investigate the problem and try to improve the tool itself.
 
-Most AI tools are either isolated chats or fixed workflow products. Real teams
-need something between those extremes:
+## What SPS does
 
-- durable project context instead of one disposable conversation;
-- a choice of CLI agents, local AI, and specialist APIs;
-- a shared workspace without uploading every project folder to a SaaS;
-- different work structures for different kinds of projects;
-- explicit control over which computer, runtime, source, and plugin may be used.
-
-SPS is the control plane for that environment.
-
-## How it works
-
-```mermaid
-flowchart LR
-  Host["Host computer<br/>SPS Desktop + local server"]
-  Workspace["Workspace<br/>sources, runs, artifacts"]
-  Plugins["Plugins<br/>workflow, rooms, tasks, memory"]
-  Nodes["Approved member computers<br/>CLI and local AI nodes"]
-  Tools["Specialist APIs and tools"]
-
-  Host --> Workspace
-  Workspace --> Plugins
-  Nodes --> Workspace
-  Tools --> Workspace
-```
-
-1. A Host creates an SPS Workspace on a Windows computer.
-2. The Host selects the project folders and AI runtimes the Workspace may use.
-3. Members can join privately through Tailscale and contribute approved
-   runtimes from their own computers.
-4. Plugins add the actual working model: Rooms, Tasks, roles, memory,
-   approvals, domain tools, or a different structure entirely.
-5. Runs, artifacts, and technical events remain observable from SPS Desktop.
-
-The Desktop app is the supported product surface. Direct browser access to a
-Workspace is not part of the product flow.
-
-## Core and plugins
-
-| SPS Core provides | Plugins can define |
+| Capability | What it means in practice |
 | --- | --- |
-| Desktop Host and Member connection | Rooms, Tasks, boards, and reports |
-| Workspace Sources and protected routes | Lead/Worker or another role model |
-| Runtime discovery and dispatch | Review and approval behavior |
-| Runs, events, artifacts, logs, and jobs | Long-term memory and compaction |
-| Secrets, storage, diagnostics, and updates | Game, app, web, research, or custom workflows |
-| Plugin inspection, compatibility, activation, update, and rollback | Domain-specific tools and UI |
+| Local project access | The host selects the folders the workspace can use. Existing projects stay in those folders. |
+| AI tool connections | The workspace can use supported command-line AI agents, local models, or API-backed agents. |
+| Execution records | Runs, events, logs, and output files make it possible to inspect what happened. |
+| Plugins | Extensions add workflows, tools, interfaces, and memory behavior for a particular project. |
+| Approved computer connections | Other computers can contribute selected AI runtimes through the Host/Member/Node connection model. |
 
-Core connection roles such as Host and Member are technical roles. A plugin
-may create its own human or AI work roles without changing the Core.
+“Local-first” describes where the workspace and project files are managed. A connected cloud AI provider may still receive data as part of a task; SPS does not make every AI tool run offline.
 
-## Start with your workflow
+## A typical workflow
 
-A new Workspace starts neutral. It includes **Plugin Discovery & Builder** and
-requires one Initial Assistant. You can describe the environment you want,
-search the available catalog, or use the public SDK to build a private plugin.
+1. Create a workspace in SPS Desktop on a Windows host computer.
+2. Select the project folders and AI tools it may use.
+3. Describe the desired workflow to **Plugin Discovery & Builder**, or use an existing extension.
+4. Review and enable the chosen plugins in **Settings > Plugins**.
+5. Run project work, inspect the results, and revise the project or workflow as needed.
 
-Plugin management lives in **Settings > Plugins**. A recommendation or draft
-does not silently change the Workspace. Installation, activation, update,
-rollback, and removal remain explicit Host actions.
+For collaboration, approved members connect privately through Tailscale. SPS Desktop is the supported application interface.
 
-## Private beta requirements
+## A design decision: keep the core separate from the workflow
 
-- Windows 10 or Windows 11, x64
-- a Google account approved for the current feedback beta
-- Tailscale on each computer used for Host/Member collaboration
-- at least one supported CLI, local AI runtime, or API-backed Agent
+The **core** handles connections, project access, execution records, storage, and plugin management. **Plugins** decide how work is arranged: for example, task boards, roles, review steps, or long-term memory.
 
-Download the current build and read the installation notes at
-[redongames.com/download](https://redongames.com/download/).
+This separation lets the same foundation support different kinds of work without requiring every project to follow one fixed structure. It also creates a clear decision point: an assistant can recommend or draft an extension, while the host decides whether to install, activate, update, roll back, or remove it.
 
-## Build plugins
+The [public Plugin SDK](https://github.com/Powerpunch777/sps-plugin-sdk) provides tools to create, validate, package, and inspect `.spsplugin` extensions. See the [plugin development guide](docs/PLUGIN-DEVELOPMENT.md) for details.
 
-Plugin authors can use the public
-[SPS Plugin SDK](https://github.com/Powerpunch777/sps-plugin-sdk) to create,
-validate, package, inspect, and publish `.spsplugin` releases.
+## Current scope and next steps
 
-Personal plugins may be tested through a Local Development Registry without
-waiting for official review. The Host still approves the registry and plugin
-lifecycle. Official plugins are distributed through the signed
-[SPS Official Extensions](https://github.com/Powerpunch777/SPS-Official-Extensions)
-catalog.
+The documented implementation includes the Windows desktop app, local host, project-source access, runtime dispatch, execution records, plugin lifecycle and compatibility checks, local development registries, an export foundation, and automatic updates.
 
-Read [Plugin development](docs/PLUGIN-DEVELOPMENT.md) for the public extension
-path.
+SPS is still being hardened for its first complete release. Work described in the product documentation includes host import and recovery, isolated plugin previews, a curated marketplace interface, signed Windows distribution, and repeated testing across two computers. Beta availability does not imply that all planned features are complete.
 
-## Current status
+To try the feedback beta, you need Windows 10/11 x64, an approved Google account, and at least one supported AI runtime. Tailscale is required on computers used for Host/Member collaboration. Keep separate backups of important work.
 
-The Windows Desktop, local Host, Workspace Sources, technical Host/Member/Node
-path, runtime dispatch, plugin lifecycle, compatibility checks, local
-development registries, export foundation, and automatic update mechanism are
-implemented.
+[Installation and beta access](https://redongames.com/download/) · [Getting started](docs/GETTING-STARTED.md) · [Product overview](docs/PRODUCT.md)
 
-The first complete release is still being hardened. Major release work
-includes Host import and recovery, isolated plugin preview, the curated
-marketplace interface, signed Windows distribution, and repeated
-two-computer acceptance testing.
+## Explore the project
 
-See [Product overview](docs/PRODUCT.md) and
-[Getting started](docs/GETTING-STARTED.md) for more detail.
+- [Soul Archer](https://github.com/Powerpunch777/school-arcade-unity) — the game developed using SPS, with screenshots and an explanation of my role.
+- [SPS Plugin SDK](https://github.com/Powerpunch777/sps-plugin-sdk) — public extension authoring and validation tools, licensed under Apache-2.0.
+- [Official Extensions](https://github.com/Powerpunch777/SPS-Official-Extensions) — the first-party extension catalog.
+- [Desktop Releases](https://github.com/Powerpunch777/SPS-Desktop-Releases) — installer releases and update metadata.
 
-## Public repositories
+For feedback or beta access, contact [redongames1234@gmail.com](mailto:redongames1234@gmail.com). For private security reports, follow [SECURITY.md](SECURITY.md); do not include credentials or private project data in public issues.
 
-- [SPS](https://github.com/Powerpunch777/SPS) — product overview and feedback
-- [SPS Plugin SDK](https://github.com/Powerpunch777/sps-plugin-sdk) — public
-  plugin authoring toolkit
-- [SPS Official Extensions](https://github.com/Powerpunch777/SPS-Official-Extensions)
-  — signed first-party extension catalog
-- [SPS Desktop Releases](https://github.com/Powerpunch777/SPS-Desktop-Releases)
-  — stable installer and update artifacts
-- [Redon Games Website](https://github.com/Powerpunch777/redon-games-website)
-  — studio and product website
-
-SPS Core and SPS Desktop product source are private. The extension boundary is
-public so developers can build plugins without receiving the proprietary
-product source.
-
-## Feedback and security
-
-For beta access, product feedback, collaboration, or a private security
-report, contact [redongames1234@gmail.com](mailto:redongames1234@gmail.com).
-
-Do not post invitation codes, account details, credentials, private project
-files, or unredacted logs in a public issue. See [SECURITY.md](SECURITY.md).
-
-## Rights
-
-This repository contains product documentation and SPS brand assets, not the
-SPS product source code. No license to the SPS software, name, or logo is
-granted by this repository. The public Plugin SDK has its own Apache-2.0
-license. See [NOTICE.md](NOTICE.md).
-
+This repository contains product documentation and brand assets. Public access does not grant a software or brand license. See [NOTICE.md](NOTICE.md).
