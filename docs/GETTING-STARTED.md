@@ -2,6 +2,10 @@
 
 SPS is currently distributed as a private feedback beta for Windows.
 
+The current README describes development candidate **0.4.135**. Check the
+download page for the status and instructions of the build actually offered;
+an older public installer or Preview may expose different features.
+
 ## Before installing
 
 Prepare:
@@ -15,7 +19,8 @@ Prepare:
 ## Install
 
 1. Open [redongames.com/download](https://redongames.com/download/).
-2. Download the current stable feedback build.
+2. Check whether the offered build is a feedback release or a Preview, and
+   follow its build-specific instructions before downloading.
 3. Install and open SPS Desktop.
 4. Complete Google sign-in inside the app.
 5. Choose **Create Host** for the main computer or **Join Host** when an
@@ -27,14 +32,23 @@ only environment for important work.
 ## Create a Workspace
 
 1. Create a Workspace on the Host.
-2. Register one Initial Assistant from an available runtime.
-3. Select Workspace Sources on the Host computer.
-4. Open **Settings > Plugins**.
-5. Use **Discovery & Builder** to discuss the workflow you need.
-6. Review and explicitly activate the selected plugin for that Workspace.
+2. Select Workspace Sources on the Host computer.
+3. Connect the supported AI runtime needed for your work.
+4. Open **Settings > Plugins** to search the Marketplace and inspect details.
+   Ordinary search works without an AI adapter; select an authorized adapter
+   if you want conversational recommendations from the Marketplace Assistant.
+5. Review and explicitly install or activate the selected plugin for that
+   Workspace. Team Workplane and Default Memory are optional.
+6. If a suitable extension does not exist, use Plugin Builder to work on a
+   separate plugin project, inspect build/test evidence, and open an isolated
+   Plugin Preview before preparing a candidate package for local review.
 
 A new Workspace has no built-in Task, Room, role, or memory policy. Those
 surfaces appear only when the relevant plugin is enabled.
+
+Search and Builder do not automatically install or activate plugins. Older
+builds may combine discovery and drafting under **Discovery & Builder**;
+the reviewed candidate separates Marketplace search from Plugin Builder.
 
 ## Add a Member computer
 

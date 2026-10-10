@@ -1,7 +1,7 @@
 # Plugin Development
 
-SPS keeps its product Core private and exposes a public extension contract for
-plugin authors.
+SPS exposes a public extension contract for plugin authors. This documentation
+repository does not include the product runtime.
 
 ## Public toolkit
 
@@ -26,6 +26,14 @@ a compatibility bridge for older packages.
 5. Add that registry explicitly in SPS Desktop.
 6. Stage and activate the plugin in a development Workspace.
 7. Inspect runs, artifacts, logs, and compatibility results before broader use.
+
+The current development candidate also includes a **Plugin Builder** surface
+and an isolated **Plugin Preview** window. Builder keeps authoring steps,
+build/test evidence, and package references together while the assistant's
+approved tools work in a separate project folder. Preview runs a candidate in
+a development workspace; installation in the real workspace remains an
+explicit Host action in **Settings > Plugins**. Full candidate-specific
+acceptance remains a release gate.
 
 SPS does not require official review for a Host to use a plugin they created
 and trust locally. Mandatory package, hash, manifest, and compatibility checks
